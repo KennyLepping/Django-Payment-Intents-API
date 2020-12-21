@@ -65,6 +65,8 @@ def paymentcomplete(request):
 			return render(request, "payment-complete.html")
 		
 
+# Creates the logged in customer in the Stripe API
+# after logging in for the first time
 def logged_in_before_check(sender, user, request, **kwargs):
 	profile = User.objects.get(username=user.username) # this is the user object
 	profile_obj = Profile.objects.get(user=profile) # pass object NOT STRING
