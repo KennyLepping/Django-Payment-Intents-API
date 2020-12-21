@@ -37,9 +37,8 @@ def checkout(request):
 @csrf_exempt
 def createpayment(request):
 	if request.user.is_authenticated:
-		cart  = Profile.objects.get(user=request.user).products
-		# total = cart.aggregate(Sum('product_price'))['product_price__sum']
-		total = 70
+		cart = Profile.objects.get(user=request.user).cart
+		total = cart.aggregate(Sum('product_price'))['product_price__sum']
 		total = total * 100
 		stripe.api_key = settings.STRIPE_SECRET_KEY
 		if request.method=="POST":

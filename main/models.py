@@ -19,9 +19,9 @@ class Product(models.Model):
 class Profile(models.Model):  
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	cart = models.ManyToManyField(Product, related_name='cart_test')
-	products = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, related_name='products_Test')
 	logged_in_before = models.BooleanField(default=False)
-	customer_id = models.CharField(default=''.join(random.choices(string.ascii_lowercase + string.digits, k=20)), max_length=20)
+	customer_id = models.CharField(default='cus_'+
+	''.join(random.choices(string.ascii_lowercase + string.digits, k=20)), max_length=24)
 
 	@receiver(post_save, sender=User) 
 	def create_user_profile(sender, instance, created, **kwargs):
